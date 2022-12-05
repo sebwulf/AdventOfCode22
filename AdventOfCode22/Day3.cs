@@ -46,13 +46,26 @@ namespace AdventOfCode22
             }
         }
 
+        public char GetCommon(string s1, string s2)
+        {
+            foreach (char c in s1)
+            {
+                foreach (char d in s2)
+                {
+                    if (d == c) return c;
+                }
+            }
+
+            return ' ';
+        }
+
         public static int GetPrio(char c)
         {
-            if (c <= 'a' && c <= 'z')
+            if ('a' <= c && c <= 'z')
             {
                 return (int)(c - 'a' + 1);
             }
-            else if (c <= 'A' && c <= 'Z')
+            else if ('A' <= c && c <= 'Z')
             {
                 return (int)(c - 'A' + 27);
             }
@@ -60,25 +73,40 @@ namespace AdventOfCode22
             return 0;
         }
 
-        public static bool test()
+        public static char GetCommon(Rucksack[] rs)
         {
-            return true;
+            var s2 = rs[1].Comp1 + rs[1].Comp2;
+            var s3 = rs[2].Comp1 + rs[2].Comp2;
+
+            foreach (var c in (rs[0].Comp1 + rs[0].Comp2))
+            {
+                if (s2.Contains(c) && s3.Contains(c)) return c;
+            }
+
+            return ' ';
         }
 
         public static void Part1()
         {
             var input = File.ReadAllLines("../../../Input/Day3.txt");
 
-            var x = test();
-
             var rucksacks = input.Select(s => new Rucksack(s));
             var commons = rucksacks.Select(r => r.GetCommon());
-            var sum = commons.Select(c => GetPrio(c)).Sum();
+            var sum = commons.Select(c => GetPrio(c)).ToList().Sum();
 
-            var y = test();
+            Console.WriteLine($"Part 1 Sum Prios: {sum}");
 
-            Console.WriteLine($"Sum Prios: {sum}");
+        }
 
+        public static void Part2()
+        {
+            var input = File.ReadAllLines("../../../Input/Day3.txt");
+
+            var rucksacks = input.Select(s => new Rucksack(s));
+            var grouped = rucksacks.Chunk(3);
+            var sum = grouped.Select(rs => GetPrio(GetCommon(rs))).Sum();
+
+            Console.WriteLine($"Part 2 Sum Prios: {sum}");
         }
     }
 }
