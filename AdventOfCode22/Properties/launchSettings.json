@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "AdventOfCode22": {
+      "commandName": "Project",
+      "nativeDebugging": false
+    }
+  }
+}
