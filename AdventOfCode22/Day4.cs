@@ -39,12 +39,6 @@ namespace AdventOfCode22
 
         public bool SectionsOverlap()
         {
-            //if (Start1 <= Start2 && Start2 <= End1) return true;
-            //if (Start1 <= End2 && End2 <= End1) return true;
-            //if (Start2 <= Start1 && Start1 <= End2) return true;
-            //if (Start2 <= End2 && End2 <= End1) return true;
-
-            //return false;
             if (End1 < Start2 ||
                 End2 < Start1)
                 return false;
