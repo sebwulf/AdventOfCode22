@@ -37,7 +37,6 @@ namespace AdventOfCode22
             int i = 0;
             for (i = 14; i < s.Length; i++)
             {
-                //var window1 = s.AsSpan().Slice(start, end);
                 var window = s.AsSpan().Slice(i - 14, 14).ToString();
                 var hasRepeats = window.GroupBy(c => c).Where(g => g.Count() > 1).Any();
 
